@@ -75,7 +75,7 @@ export const AdminPanel = ({
   };
 
   const handleLivesChange = (event: SelectChangeEvent) => {
-    setLives(event.target.value);
+    setLives(Number(event.target.value));
   };
 
   return (
@@ -116,7 +116,7 @@ export const AdminPanel = ({
               <input type="file" hidden multiple onChange={e => handleUploadFiles(e, 'title')} />
             </Button>
             <span style={{ marginLeft: '8px' }}>Lives</span>
-            <Select value={lives} onChange={handleLivesChange} size="small">
+            <Select value={String(lives)} onChange={handleLivesChange} size="small">
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
               <MenuItem value={3}>3</MenuItem>

@@ -21,4 +21,6 @@ export interface AdminPanelProps {
   songs: Song[];
   setSongs: Dispatch<SetStateAction<Song[]>>;
   setIsMusicPlaying: Dispatch<SetStateAction<boolean>>;
+  lives: number;
+  setLives: Dispatch<SetStateAction<number>>;
 }

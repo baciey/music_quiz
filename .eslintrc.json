@@ -3,11 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "react-app", //eslint-config-react-app
-    "prettier"
-  ],
+  "extends": ["plugin:react/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {

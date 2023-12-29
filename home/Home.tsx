@@ -10,53 +10,53 @@ import { AdminPanel } from './AdminPanel/AdminPanel';
 import { GameBoard } from './GameBoard/GameBoard';
 import Image from 'next/image';
 
-// const fakePlayers = [
-//   {
-//     name: 'Mirek',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyQ',
-//   },
-//   {
-//     name: 'Halina',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyW',
-//   },
-//   {
-//     name: 'Gocha',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyE',
-//   },
-//   {
-//     name: 'Tomasz',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyR',
-//   },
-//   {
-//     name: 'Kacha',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyT',
-//   },
-//   {
-//     name: 'Sara',
-//     score: 0,
-//     lives: 3,
-//     img: null,
-//     keyCode: 'KeyY',
-//   },
-// ];
+const fakePlayers = [
+  {
+    name: 'Mirek',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyQ',
+  },
+  {
+    name: 'Halina',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyW',
+  },
+  {
+    name: 'Gocha',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyE',
+  },
+  {
+    name: 'Tomasz',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyR',
+  },
+  {
+    name: 'Kacha',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyT',
+  },
+  {
+    name: 'Sara',
+    score: 0,
+    lives: 3,
+    img: null,
+    keyCode: 'KeyY',
+  },
+];
 
 export const HomePage: NextPage = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState<Player[]>(fakePlayers);
   const [playerName, setPlayerName] = useState<string>('');
   const [keyCode, setKeyCode] = useState<string>('');
   const [songs, setSongs] = useState<Song[]>([]);
@@ -67,6 +67,7 @@ export const HomePage: NextPage = () => {
   const [fastestPlayer, setFastestPlayer] = useState<Player | null>(null);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [inactiveKeyCodes, setInactiveKeyCodes] = useState<string[]>([]);
+  const [gameOverKeyCodes, setGameOverKeyCodes] = useState<string[]>([]);
   const [isSongTitleDialogOpen, setIsSongTitleDialogOpen] = useState<boolean>(false);
   const [isExploding, setIsExploding] = useState<boolean>(false);
 
@@ -106,7 +107,11 @@ export const HomePage: NextPage = () => {
   const handleKeyDownWhenMusicIsPlaying = (e: KeyboardEvent) => {
     if (!isMusicPlaying) return;
     const fastestPlayer = players.find(player => player.keyCode === e.code) || null;
-    if (fastestPlayer && !inactiveKeyCodes.includes(fastestPlayer.keyCode)) {
+    if (
+      fastestPlayer &&
+      !inactiveKeyCodes.includes(fastestPlayer.keyCode) &&
+      !gameOverKeyCodes.includes(fastestPlayer.keyCode)
+    ) {
       setIsMusicPlaying(false);
       audioRef?.current?.pause();
       setFastestPlayer(fastestPlayer);
@@ -134,6 +139,9 @@ export const HomePage: NextPage = () => {
     setPlayers(copy);
     setFastestPlayer(null);
     setInactiveKeyCodes([...inactiveKeyCodes, fastestPlayer.keyCode]);
+    if (copy[index].lives === 0) {
+      setGameOverKeyCodes([...gameOverKeyCodes, fastestPlayer.keyCode]);
+    }
   };
 
   const handleCloseSongTitleDialog = () => {
@@ -185,6 +193,7 @@ export const HomePage: NextPage = () => {
           isGameStarted={isGameStarted}
           inactiveKeyCodes={inactiveKeyCodes}
           fastestPlayer={fastestPlayer}
+          gameOverKeyCodes={gameOverKeyCodes}
         />
         <Vinyl isMusicPlaying={isMusicPlaying} isGameStarted={isGameStarted} players={players} />
       </div>

@@ -5,6 +5,7 @@ import styles from './GameBoard.module.css';
 export const GameBoard = ({
   isGameStarted,
   inactiveKeyCodes,
+  gameOverKeyCodes,
   players,
   fastestPlayer,
 }: GameBoardProps) => {
@@ -16,12 +17,14 @@ export const GameBoard = ({
       {isGameStarted &&
         players.map((player, index) => {
           const isFastest = fastestPlayer?.name === player.name;
+          const isInactive =
+            inactiveKeyCodes.includes(player.keyCode) || gameOverKeyCodes.includes(player.keyCode);
           return (
             <div
               key={index}
-              className={`${styles.player} ${
-                inactiveKeyCodes.includes(player.keyCode) && styles.inactivePlayer
-              } ${isFastest && styles.fastestPlayer}`}
+              className={`${styles.player} ${isInactive && styles.inactivePlayer} ${
+                isFastest && styles.fastestPlayer
+              }`}
             >
               <div
                 className={`${styles.playerInner} ${isFastest && styles.fastestPlayerInner}`}

@@ -1,0 +1,41 @@
+{
+  "name": "next_template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next build && next export",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install",
+    "eslint": "eslint --color --max-warnings=0 --",
+    "prettier-check": "prettier --check pages",
+    "prettier-fix": "prettier --write pages",
+    "check-types": "tsc --noemit"
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.1",
+    "@mui/material": "^5.15.1",
+    "next": "12.3.1",
+    "react": "18.2.0",
+    "react-confetti-explosion": "^2.1.2",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.3",
+    "@types/node": "18.8.3",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.24.0",
+    "eslint-config-next": "12.3.1",
+    "husky": "^8.0.0",
+    "prettier": "2.7.1",
+    "typescript": "4.8.4"
+  }
+}

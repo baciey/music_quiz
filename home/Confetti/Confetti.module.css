@@ -1,0 +1,15 @@
+.confetti1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.confetti2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.confetti3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
